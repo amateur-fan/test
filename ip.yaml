@@ -27,12 +27,3 @@ paths:
           description: Unauthorized. The API key is missing or invalid.
         429:
           description: Too many requests. The rate limit of the API key has been exceeded.
-      security:
-        - ApiKeyAuth: []
-
-components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-apikey
