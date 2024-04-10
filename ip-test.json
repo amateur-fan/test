@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VirusTotal IP Check",
+    "description": "Query VirusTotal for IP threat information",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.virustotal.com/api/v3/"
+    }
+  ],
+  "paths": {
+    "/ip_addresses/{ip}": {
+      "get": {
+        "operationId": "CheckIP",
+        "summary": "Checks an IP address against VirusTotal",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ip",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The threat information from VirusTotal"
+          },
+          "400": {
+            "description": "Bad request. The IP is not in a valid format."
+          },
+          "401": {
+            "description": "Unauthorized. The API key is missing or invalid."
+          },
+          "429": {
+            "description": "Too many requests. The rate limit of the API key has been exceeded."
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-apikey"
+      }
+    }
+  }
+}
